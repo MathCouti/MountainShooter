@@ -5,7 +5,7 @@ import sys
 from cgitb import text
 
 import pygame.display
-from pygame import Surface
+from pygame import Surface, KEYDOWN, K_ESCAPE
 
 from code import Entity
 from code.Const import C_WHITE, WIN_HEIGHT, MENU_OPTION, EVENT_ENEMY, SPAWN_TIME, C_GREEN, C_CYAM, EVENT_TIMEOUT, \
@@ -59,6 +59,9 @@ class Level:
                 if event.type == pygame.QUIT: # evento de fechar
                     pygame.quit()
                     sys.exit()
+                if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        return
                 if event.type == EVENT_ENEMY: # evento de spawn inimigo
                     choise = random.choice(('Enemy1', 'Enemy2', 'Enemy3'))
                     self.entity_list.append(EntityFactory.get_entity(choise))
