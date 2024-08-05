@@ -27,6 +27,7 @@ class Menu():
                     self.menu_text(20, MENU_OPTION[i], C_YELLOW, ((WIN_WIDTH / 2), 200 + 25 * i))
                 else:
                     self.menu_text(20, MENU_OPTION[i], C_WHITE, ((WIN_WIDTH / 2), 200 + 25 * i))
+            self.menu_text(14, f'Matheus Coutinho de Paula RU: 4738366', C_WHITE, (WIN_WIDTH- 170, 10))
             pygame.display.flip()
 
 

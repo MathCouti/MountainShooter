@@ -17,10 +17,12 @@ from code.Player import Player
 
 
 class Level:
-    def __init__(self, window: Surface, name: str, game_mode : str, player_score : list[int]):
+    def __init__(self, window: Surface, name: str, game_mode : str, player_score : list[int], TIME : TIMEOUT_LEVEL,
+                 list_enemys : list[str]):
         self.window = window
-        self.timeout = TIMEOUT_LEVEL  # 20 segundos
+        self.timeout = TIME  # 20 segundos
         self.name = name
+        self.list_enemys = list_enemys
         self.game_mode = game_mode
         self.entity_list: list[Entity] = []
         self.entity_list.extend(EntityFactory.get_entity(self.name + 'Bg'))  # extend para mais de 1
@@ -63,7 +65,7 @@ class Level:
                     if event.key == K_ESCAPE:
                         return
                 if event.type == EVENT_ENEMY: # evento de spawn inimigo
-                    choise = random.choice(('Enemy1', 'Enemy2', 'Enemy3'))
+                    choise = random.choice(self.list_enemys)
                     self.entity_list.append(EntityFactory.get_entity(choise))
                 if event.type == EVENT_TIMEOUT:  # evento de time
                     self.timeout -= TIMEOUT_STEP
@@ -86,7 +88,6 @@ class Level:
             self.level_text(14, f'{self.name} - Timeout: {self.timeout / 1000:.1f}s', C_WHITE, (10, 5))
             self.level_text(14, f'fps: {clock.get_fps():.0f}', C_WHITE, (10, WIN_HEIGHT - 35))
             self.level_text(14, f'entidades: {len(self.entity_list)}', C_WHITE, (10, WIN_HEIGHT - 20))
-
             pygame.display.flip()
 
             # Verifies
